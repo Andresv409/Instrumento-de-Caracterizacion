@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  
+  <meta charset="UTF-8">
+  <title>Formulario</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <form action="guardar.php" method="post">
+
+    <h1>Ministerio de Salud y Protección Social
+ Formulario para caracterización - Equipos Básicos de Salud <span class="pill">Equipos Básicos de Salud</span></h1>
+        <div class="header">
+  <div class="header-image-left">
+    <!-- Imagen izquierda -->
+  </div>
+  <div class="header-content">
+  </div>
+  <div class="header-image-right">
+    <!-- Imagen derecha -->
+  </div>
+</div>
+    <p class="muted">Basado en el instrumento de caracterización (versión 04/2024). Complete todos los campos aplicables. Los campos marcados como “SI/NO” respetan la lógica del formulario.</p>
+
+<div class="form-container">
+            <!-- 1. INFORMACIÓN GENERAL (1 - 23) -->
+            <div class="section">
+                <h2>1. Información General</h2>
+                <div class="three-columns">
+                    <div class="form-group">
+                        <label for="departamento">1. Departamento</label>
+                        <div class="custom-select">
+                            <select id="departamento" name="departamento" required>
+                                <option value="">-- Seleccione un departamento --</option>
+                                <option value="AMAZONAS">Amazonas</option>
+                                <option value="ANTIOQUIA">Antioquia</option>
+                                <option value="ARAUCA">Arauca</option>
+                                <option value="ATLÁNTICO">Atlántico</option>
+                                <option value="BOLÍVAR">Bolívar</option>
+                                <option value="BOYACÁ">Boyacá</option>
+                                <option value="CALDAS">Caldas</option>
+                                <option value="CAQUETÁ">Caquetá</option>
+                                <option value="CASANARE">Casanare</option>
+                                <option value="CAUCA">Cauca</option>
+                                <option value="CESAR">Cesar</option>
+                                <option value="CHOCÓ">Chocó</option>
+                                <option value="CÓRDOBA">Córdoba</option>
+                                <option value="CUNDINAMARCA">Cundinamarca</option>
+                                <option value="GUAINÍA">Guainía</option>
+                                <option value="GUAVIARE">Guaviare</option>
+                                <option value="HUILA">Huila</option>
+                                <option value="LA GUAJIRA">La Guajira</option>
+                                <option value="MAGDALENA">Magdalena</option>
+                                <option value="META">Meta</option>
+                                <option value="NARIÑO">Nariño</option>
+                                <option value="NORTE DE SANTANDER">Norte de Santander</option>
+                                <option value="PUTUMAYO">Putumayo</option>
+                                <option value="QUINDÍO">Quindío</option>
+                                <option value="RISARALDA">Risaralda</option>
+                                <option value="ARCHIPIÉLAGO DE SAN ANDRÉS, PROVIDENCIA Y SANTA CATALINA">San Andrés y Providencia</option>
+                                <option value="SANTANDER">Santander</option>
+                                <option value="SUCRE">Sucre</option>
+                                <option value="TOLIMA">Tolima</option>
+                                <option value="VALLE DEL CAUCA">Valle del Cauca</option>
+                                <option value="VAUPÉS">Vaupés</option>
+                                <option value="VICHADA">Vichada</option>
+                                <option value="BOGOTÁ, D.C.">Bogotá D.C.</option>
+                            </select>
+                        </div>
+                    </div>
+           <div class="form-group">
+            <label for="municipio">2. Municipio</label>
+            <select id="municipio" name="municipio" disabled>
+                <option value="">-- Primero seleccione un departamento --</option>
+            </select>
+        </div>
+
+    <script>
+        // Base de datos de municipios por departamento
+        const municipiosPorDepartamento = {
+            "ANTIOQUIA": [
+                "MEDELLÍN", "ABEJORRAL", "ABRIAQUÍ", "ALEJANDRÍA", "AMAGÁ", "AMALFI", "ANDES", "ANGELÓPOLIS", 
+                "ANGOSTURA", "ANORÍ", "SANTA FÉ DE ANTIOQUIA", "ANZÁ", "APARTADÓ", "ARBOLETES", "ARGELIA", 
+                "ARMENIA", "BARBOSA", "BELMIRA", "BELLO", "BETANIA", "BETULIA", "CIUDAD BOLÍVAR", "BRICEÑO", 
+                "BURITICÁ", "CÁCERES", "CAICEDO", "CALDAS", "CAMPAMENTO", "CAÑASGORDAS", "CARACOLÍ", 
+                "CARAMANTA", "CAREPA", "EL CARMEN DE VIBORAL", "CAROLINA", "CAUCASIA", "CHIGORODÓ", "CISNEROS", 
+                "COCORNÁ", "CONCEPCIÓN", "CONCORDIA", "COPACABANA", "DABEIBA", "DONMATÍAS", "EBÉJICO", 
+                "EL BAGRE", "ENTRERRÍOS", "ENVIGADO", "FREDONIA", "FRONTINO", "GIRALDO", "GIRARDOTA", 
+                "GÓMEZ PLATA", "GRANADA", "GUADALUPE", "GUARNE", "GUATAPÉ", "HELICONIA", "HISPANIA", 
+                "ITAGÜÍ", "ITUANGO", "JARDÍN", "JERICÓ", "LA CEJA", "LA ESTRELLA", "LA PINTADA", "LA UNIÓN", 
+                "LIBORINA", "MACEO", "MARINILLA", "MONTEBELLO", "MURINDÓ", "MUTATÁ", "NARIÑO", "NECOCLÍ", 
+                "NECHÍ", "OLAYA", "PEÑOL", "PEQUE", "PUEBLORRICO", "PUERTO BERRÍO", "PUERTO NARE", 
+                "PUERTO TRIUNFO", "REMEDIOS", "RETIRO", "RIONEGRO", "SABANALARGA", "SABANETA", "SALGAR", 
+                "SAN ANDRÉS DE CUERQUÍA", "SAN CARLOS", "SAN FRANCISCO", "SAN JERÓNIMO", "SAN JOSÉ DE LA MONTAÑA", 
+                "SAN JUAN DE URABÁ", "SAN LUIS", "SAN PEDRO DE LOS MILAGROS", "SAN PEDRO DE URABÁ", "SAN RAFAEL", 
+                "SAN ROQUE", "SAN VICENTE FERRER", "SANTA BÁRBARA", "SANTA ROSA DE OSOS", "SANTO DOMINGO", 
+                "EL SANTUARIO", "SEGOVIA", "SONSÓN", "SOPETRÁN", "TÁMESIS", "TARAZÁ", "TARSO", "TITIRIBÍ", 
+                "TOLEDO", "TURBO", "URAMITA", "URRAO", "VALDIVIA", "VALPARAÍSO", "VEGACHÍ", "VENECIA", 
+                "VIGÍA DEL FUERTE", "YALÍ", "YARUMAL", "YOLOMBÓ", "YONDÓ", "ZARAGOZA"
+            ],
+            "ATLÁNTICO": [
+                "BARRANQUILLA", "BARANOA", "CAMPO DE LA CRUZ", "CANDELARIA", "GALAPA", "JUAN DE ACOSTA", 
+                "LURUACO", "MALAMBO", "MANATÍ", "PALMAR DE VARELA", "PIOJÓ", "POLONUEVO", "PONEDERA", 
+                "PUERTO COLOMBIA", "REPELÓN", "SABANAGRANDE", "SABANALARGA", "SANTA LUCÍA", "SANTO TOMÁS", 
+                "SOLEDAD", "SUAN", "TUBARÁ", "USIACURÍ"
+            ],
+            "BOGOTÁ, D.C.": [
+                "BOGOTÁ, D.C."
+            ],
+            "BOLÍVAR": [
+                "CARTAGENA DE INDIAS", "ACHÍ", "ALTOS DEL ROSARIO", "ARENAL", "ARJONA", "ARROYOHONDO", 
+                "BARRANCO DE LOBA", "CALAMAR", "CANTAGALLO", "CICUCO", "CÓRDOBA", "CLEMENCIA", 
+                "EL CARMEN DE BOLÍVAR", "EL GUAMO", "EL PEÑÓN", "HATILLO DE LOBA", "MAGANGUÉ", "MAHATES", 
+                "MARGARITA", "MARÍA LA BAJA", "MONTECRISTO", "SANTA CRUZ DE MOMPOX", "MORALES", "NOROSÍ", 
+                "PINILLOS", "REGIDOR", "RÍO VIEJO", "SAN CRISTÓBAL", "SAN ESTANISLAO", "SAN FERNANDO", 
+                "SAN JACINTO", "SAN JACINTO DEL CAUCA", "SAN JUAN NEPOMUCENO", "SAN MARTÍN DE LOBA", 
+                "SAN PABLO", "SANTA CATALINA", "SANTA ROSA", "SANTA ROSA DEL SUR", "SIMITÍ", "SOPLAVIENTO", 
+                "TALAIGUA NUEVO", "TIQUISIO", "TURBACO", "TURBANÁ", "VILLANUEVA", "ZAMBRANO"
+            ],
+            "BOYACÁ": [
+                "TUNJA", "ALMEIDA", "AQUITANIA", "ARCABUCO", "BELÉN", "BERBEO", "BETÉITIVA", "BOAVITA", 
+                "BOYACÁ", "BRICEÑO", "BUENAVISTA", "BUSBANZÁ", "CALDAS", "CAMPOHERMOSO", "CERINZA", 
+                "CHINAVITA", "CHIQUINQUIRÁ", "CHISCAS", "CHITA", "CHITARAQUE", "CHIVATÁ", "CIÉNEGA", 
+                "CÓMBITA", "COPER", "CORRALES", "COVARACHÍA", "CUBARÁ", "CUCAITA", "CUÍTIVA", "CHÍQUIZA", 
+                "CHIVOR", "DUITAMA", "EL COCUY", "EL ESPINO", "FIRAVITOBA", "FLORESTA", "GACHANTIVÁ", 
+                "GÁMEZA", "GARAGOA", "GUACAMAYAS", "GUATEQUE", "GUAYATÁ", "GÜICÁN DE LA SIERRA", "IZA", 
+                "JENESANO", "JERICÓ", "LABRANZAGRANDE", "LA CAPILLA", "LA VICTORIA", "LA UVITA", 
+                "VILLA DE LEYVA", "MACANAL", "MARIPÍ", "MIRAFLORES", "MONGUA", "MONGUÍ", "MONIQUIRÁ", 
+                "MOTAVITA", "MUZO", "NOBSA", "NUEVO COLÓN", "OICATÁ", "OTANCHE", "PACHAVITA", "PÁEZ", 
+                "PAIPA", "PAJARITO", "PANQUEBA", "PAUNA", "PAYA", "PAZ DE RÍO", "PESCA", "PISBA", 
+                "PUERTO BOYACÁ", "QUÍPAMA", "RAMIRIQUÍ", "RÁQUIRA", "RONDÓN", "SABOYÁ", "SÁCHICA", 
+                "SAMACÁ", "SAN EDUARDO", "SAN JOSÉ DE PARE", "SAN LUIS DE GACENO", "SAN MATEO", 
+                "SAN MIGUEL DE SEMA", "SAN PABLO DE BORBUR", "SANTANA", "SANTA MARÍA", "SANTA ROSA DE VITERBO", 
+                "SANTA SOFÍA", "SATIVANORTE", "SATIVASUR", "SIACHOQUE", "SOATÁ", "SOCOTÁ", "SOCHA", 
+                "SOGAMOSO", "SOMONDOCO", "SORA", "SOTAQUIRÁ", "SORACá", "SUSACÓN", "SUTAMARCHÁN", 
+                "SUTATENZA", "TASCO", "TENZA", "TIBANÁ", "TIBASOSA", "TINJACÁ", "TIPACOQUE", "TOCA", 
+                "TOGÜÍ", "TÓPAGA", "TOTA", "TUNUNGUÁ", "TURMEQUÉ", "TUTA", "TUTAZÁ", "ÚMBITA", 
+                "VENTAQUEMADA", "VIRACACHÁ", "ZETAQUIRA"
+            ],
+            "CALDAS": [
+                "MANIZALES", "AGUADAS", "ANSERMA", "ARANZAZU", "BELALCÁZAR", "CHINCHINÁ", "FILADELFIA", 
+                "LA DORADA", "LA MERCED", "MANZANARES", "MARMATO", "MARQUETALIA", "MARULANDA", "NEIRA", 
+                "NORCASIA", "PÁCORA", "PALESTINA", "PENSILVANIA", "RIOSUCIO", "RISARALDA", "SALAMINA", 
+                "SAMANÁ", "SAN JOSÉ", "SUPÍA", "VICTORIA", "VILLAMARÍA", "VITERBO"
+            ],
+            "CAQUETÁ": [
+                "FLORENCIA", "ALBANIA", "BELÉN DE LOS ANDAQUÍES", "CARTAGENA DEL CHAIRÁ", "CURILLO", 
+                "EL DONCELLO", "EL PAUJÍL", "LA MONTAÑITA", "MILÁN", "MORELIA", "PUERTO RICO", 
+                "SAN JOSÉ DEL FRAGUA", "SAN VICENTE DEL CAGUÁN", "SOLANO", "SOLITA", "VALPARAÍSO"
+            ],
+            "CAUCA": [
+                "POPAYÁN", "ALMAGUER", "ARGELIA", "ALBANIA", "BALBOA", "BOLÍVAR", "BUENOS AIRES", "CAJIBÍO", 
+                "CALDONO", "CALOTO", "CORINTO", "EL TAMBO", "FLORENCIA", "GUACHENÉ", "GUAPI", "INZÁ", 
+                "JAMBALÓ", "LA SIERRA", "LA VEGA", "LÓPEZ DE MICAY", "MERCADERES", "MIRANDA", "MORALES", 
+                "PADILLA", "PÁEZ", "PATÍA", "PIAMONTE", "PIENDAMÓ - TUNÍA", "PUERTO TEJADA", "PURACÉ", 
+                "ROSAS", "SAN SEBASTIÁN", "SANTANDER DE QUILICHAO", "SANTA ROSA", "SILVIA", "SOTARÁ - PAISPAMBA", 
+                "SUÁREZ", "SUCRE", "TIMBÍO", "TIMBIQUÍ", "TORIBÍO", "TOTORÓ", "VILLA RICA"
+            ],
+            "CESAR": [
+                "VALLEDUPAR", "AGUACHICA", "AGUSTÍN CODAZZI", "ASTREA", "BECERRIL", "BOSCONIA", "CHIMICHAGUA", 
+                "CHIRIGUANÁ", "CURUMANÍ", "EL COPEY", "EL PASO", "GAMARRA", "GONZÁLEZ", "LA GLORIA", 
+                "LA JAGUA DE IBIRICO", "MANAURE BALCÓN DEL CESAR", "PAILITAS", "PELAYA", "PUEBLO BELLO", 
+                "RÍO DE ORO", "LA PAZ", "SAN ALBERTO", "SAN DIEGO", "SAN MARTín", "TAMALAMEQUE"
+            ],
+            "CÓRDOBA": [
+                "MONTERÍA", "AYAPEL", "BUENAVISTA", "CANALETE", "CERETÉ", "CHIMÁ", "CHINÚ", "CIÉNAGA DE ORO", 
+                "COTORRA", "LA APARTADA", "LORICA", "LOS CÓRDOBAS", "MOMIL", "MONTELÍBANO", "MOÑITOS", 
+                "PLANETA RICA", "PUEBLO NUEVO", "PUERTO ESCONDIDO", "PUERTO LIBERTADOR", "PURÍSIMA DE LA CONCEPCIÓN", 
+                "SAHAGÚN", "SAN ANDRÉS DE SOTAVENTO", "SAN ANTERO", "SAN BERNARDO DEL VIENTO", "SAN CARLOS", 
+                "SAN JOSÉ DE URÉ", "SAN PELAYO", "TIERRALTA", "TUCHÍN", "VALENCIA"
+            ],
+            "CUNDINAMARCA": [
+                "AGUA DE DIOS", "ALBÁN", "ANAPOIMA", "ANOLAIMA", "ARBELÁEZ", "BELTRán", "BITUIMA", "BOJACÁ", 
+                "CABRERA", "CACHIPAY", "CAJICÁ", "CAPARRAPÍ", "CÁQUEZA", "CARMEN DE CARUPA", "CHAGUANÍ", 
+                "CHÍA", "CHIPAQUE", "CHOACHÍ", "CHOCONTÁ", "COGUA", "COTA", "CUCUNUBÁ", "EL COLEGIO", 
+                "EL PEÑÓN", "EL ROSAL", "FACATATIVÁ", "FÓMEQUE", "FOSCA", "FUNZA", "FÚQUENE", "FUSAGASUGÁ", 
+                "GACHALÁ", "GACHANCIPÁ", "GACHETÁ", "GAMA", "GIRARDOT", "GRANADA", "GUACHETÁ", "GUADUAS", 
+                "GUASCA", "GUATAQUÍ", "GUATAVITA", "GUAYABAL DE SÍQUIMA", "GUAYABETAL", "GUTIÉRREZ", 
+                "JERUSALÉN", "JUNÍN", "LA CALERA", "LA MESA", "LA PALMA", "LA PEÑA", "LA VEGA", "LENGUAZAQUE", 
+                "MACHETÁ", "MADRID", "MANTA", "MEDINA", "MOSQUERA", "NARIÑO", "NEMOCÓN", "NILO", "NIMAIMA", 
+                "NOCAIMA", "VENECIA", "PACHO", "PAIME", "PANDI", "PARATEBUENO", "PASCA", "PUERTO SALGAR", 
+                "PULÍ", "QUEBRADANEGRA", "QUETAME", "QUIPILE", "APULO", "RICAURTE", "SAN ANTONIO DEL TEQUENDAMA", 
+                "SAN BERNARDO", "SAN CAYETANO", "SAN FRANCISCO", "SAN JUAN DE RIOSECO", "SASAIMA", 
+                "SESQUILÉ", "SIBATÉ", "SILVANIA", "SIMIJACA", "SOACHA", "SOPÓ", "SUBACHOQUE", "SUESCA", 
+                "SUPATÁ", "SUSA", "SUTATAUSA", "TABIO", "TAUSA", "TENA", "TENJO", "TIBACUY", "TIBIRITA", 
+                "TOCAIMA", "TOCANCIPÁ", "TOPAIPÍ", "UBALÁ", "UBAQUE", "VILLA DE SAN DIEGO DE UBATÉ", "UNE", 
+                "ÚTICA", "VERGARA", "VIANÍ", "VILLAGÓMEZ", "VILLAPINZÓN", "VILLETA", "VIOTÁ", "YACOPÍ", 
+                "ZIPACÓN", "ZIPAQUIRÁ"
+            ],
+            "CHOCÓ": [
+                "QUIBDÓ", "ACANDÍ", "ALTO BAUDÓ", "ATRATO", "BAGADÓ", "BAHÍA SOLANO", "BAJO BAUDÓ", "BOJAYÁ", 
+                "EL CANTÓN DEL SAN PABLO", "CARMEN DEL DARIÉN", "CÉRTEGUI", "CONDOTO", "EL CARMEN DE ATRATO", 
+                "EL LITORAL DEL SAN JUAN", "ISTMINA", "JURADÓ", "LLORÓ", "MEDIO ATRATO", "MEDIO BAUDÓ", 
+                "MEDIO SAN JUAN", "NÓVITA", "NUEVO BELÉN DE BAJIRÁ", "NUQUÍ", "RÍO IRÓ", "RÍO QUITO", 
+                "RIOSUCIO", "SAN JOSÉ DEL PALMAR", "SIPÍ", "TADÓ", "UNGUÍA", "UNIÓN PANAMERICANA"
+            ],
+            "HUILA": [
+                "NEIVA", "ACEVEDO", "AGRADO", "AIPE", "ALGECIRAS", "ALTAMIRA", "BARAYA", "CAMPOALEGRE", 
+                "COLOMBIA", "ELÍAS", "GARZÓN", "GIGANTE", "GUADALUPE", "HOBO", "ÍQUIRA", "ISNOS", 
+                "LA ARGENTINA", "LA PLATA", "NÁTAGA", "OPORAPA", "PAICOL", "PALERMO", "PALESTINA", 
+                "PITAL", "PITALITO", "RIVERA", "SALADOBLANCO", "SAN AGUSTÍN", "SANTA MARÍA", "SUAZA", 
+                "TARQUI", "TESALIA", "TELLO", "TERUEL", "TIMANÁ", "VILLAVIEJA", "YAGUARÁ"
+            ],
+            "LA GUAJIRA": [
+                "RIOHACHA", "ALBANIA", "BARRANCAS", "DIBULLA", "DISTRACCIÓN", "EL MOLINO", "FONSECA", 
+                "HATONUEVO", "LA JAGUA DEL PILAR", "MAICAO", "MANAURE", "SAN JUAN DEL CESAR", "URIBIA", 
+                "URUMITA", "VILLANUEVA"
+            ],
+            "MAGDALENA": [
+                "SANTA MARTA", "ALGARROBO", "ARACATACA", "ARIGUANÍ", "CERRO DE SAN ANTONIO", "CHIVOLO", 
+                "CIÉNAGA", "CONCORDIA", "EL BANCO", "EL PIÑÓN", "EL RETÉN", "FUNDACIÓN", "GUAMAL", 
+                "NUEVA GRANADA", "PEDRAZA", "PIJIÑO DEL CARMEN", "PIVIJAY", "PLATO", "PUEBLOVIEJO", 
+                "REMOLINO", "SABANAS DE SAN ÁNGEL", "SALAMINA", "SAN SEBASTIÁN DE BUENAVISTA", "SAN ZENÓN", 
+                "SANTA ANA", "SANTA BÁRBARA DE PINTO", "SITIONUEVO", "TENERIFE", "ZAPAYÁN", "ZONA BANANERA"
+            ],
+            "META": [
+                "VILLAVICENCIO", "ACACÍAS", "BARRANCA DE UPÍA", "CABUYARO", "CASTILLA LA NUEVA", "CUBARRAL", 
+                "CUMARAL", "EL CALVARIO", "EL CASTILLO", "EL DORADO", "FUENTE DE ORO", "GRANADA", "GUAMAL", 
+                "MAPIRIPÁN", "MESETAS", "LA MACARENA", "URIBE", "LEJANÍAS", "PUERTO CONCORDIA", "PUERTO GAITÁN", 
+                "PUERTO LÓPEZ", "PUERTO LLERAS", "PUERTO RICO", "RESTREPO", "SAN CARLOS DE GUAROA", 
+                "SAN JUAN DE ARAMA", "SAN JUANITO", "SAN MARTÍN", "VISTAHERMOSA"
+            ],
+            "NARIÑO": [
+                "PASTO", "ALBÁN", "ALDANA", "ANCUYA", "ARBOLEDA", "BARBACOAS", "BELÉN", "BUESACO", 
+                "COLÓN", "CONSACÁ", "CONTADERO", "CÓRDOBA", "CUASPUD CARLOSAMA", "CUMBAL", "CUMBITARA", 
+                "CHACHAGÜÍ", "EL CHARCO", "EL PEÑOL", "EL ROSARIO", "EL TABLÓN DE GÓMEZ", "EL TAMBO", 
+                "FUNES", "GUACHUCAL", "GUAITARILLA", "GUALMATÁN", "ILES", "IMUÉS", "IPIALES", "LA CRUZ", 
+                "LA FLORIDA", "LA LLANADA", "LA TOLA", "LA UNIÓN", "LEIVA", "LINARES", "LOS ANDES", 
+                "MAGÜÍ", "MALLAMA", "MOSQUERA", "NARIÑO", "OLAYA HERRERA", "OSPINA", "FRANCISCO PIZARRO", 
+                "POLICARPA", "POTOSÍ", "PROVIDENCIA", "PUERRES", "PUPIALES", "RICAURTE", "ROBERTO PAYÁN", 
+                "SAMANIEGO", "SANDONÁ", "SAN BERNARDO", "SAN LORENZO", "SAN PABLO", "SAN PEDRO DE CARTAGO", 
+                "SANTA BÁRBARA", "SANTACRUZ", "SAPUYES", "TAMINANGO", "TANGUA", "SAN ANDRÉS DE TUMACO", 
+                "TÚQUERRES", "YACUANQUER"
+            ],
+            "NORTE DE SANTANDER": [
+                "SAN JOSÉ DE CÚCUTA", "ÁBREGO", "ARBOLEDAS", "BOCHALEMA", "BUCARASICA", "CÁCOTA", 
+                "CÁCHIRA", "CHINÁCOTA", "CHITAGÁ", "CONVENCIÓN", "CUCUTILLA", "DURANIA", "EL CARMEN", 
+                "EL TARRA", "EL ZULIA", "GRAMALOTE", "HACARÍ", "HERRÁN", "LABATECA", "LA ESPERANZA", 
+                "LA PLAYA", "LOS PATIOS", "LOURDES", "MUTISCUA", "OCAÑA", "PAMPLONA", "PAMPLONITA", 
+                "PUERTO SANTANDER", "RAGONVALIA", "SALAZAR", "SAN CALIXTO", "SAN CAYETANO", "SANTIAGO", 
+                "SARDINATA", "SILOS", "TEORAMA", "TIBÚ", "TOLEDO", "VILLA CARO", "VILLA DEL ROSARIO"
+            ],
+            "QUINDÍO": [
+                "ARMENIA", "BUENAVISTa", "CALARCÁ", "CIRCASIA", "CÓRDOBA", "FILANDIA", "GÉNOVA", 
+                "LA TEBAIDA", "MONTENEGRO", "PIJAO", "QUIMBAYA", "SALENTO"
+            ],
+            "RISARALDA": [
+                "PEREIRA", "APÍA", "BALBOA", "BELÉN DE UMBRÍA", "DOSQUEBRADAS", "GUÁTICA", "LA CELIA", 
+                "LA VIRGINIA", "MARSELLA", "MISTRATÓ", "PUEBLO RICO", "QUINCHÍA", "SANTA ROSA DE CABAL", 
+                "SANTUARIO"
+            ],
+            "SANTANDER": [
+                "BUCARAMANGA", "AGUADA", "ALBANIA", "ARATOCA", "BARBOSA", "BARICHARA", "BARRANCABERMEJA", 
+                "BETULIA", "BOLÍVAR", "CABRERA", "CALIFORNIA", "CAPITANEJO", "CARCASÍ", "CEPITÁ", 
+                "CERRITO", "CHARALÁ", "CHARTA", "CHIMA", "CHIPATÁ", "CIMITARRA", "CONCEPCIÓN", "CONFINES", 
+                "CONTRATACIÓN", "COROMORO", "CURITÍ", "EL CARMEN DE CHUCURÍ", "EL GUACAMAYO", "EL PEÑÓN", 
+                "EL PLAYÓN", "ENCINO", "ENCISO", "FLORIÁN", "FLORIDABLANCA", "GALÁN", "GÁMBITA", "GIRÓN", 
+                "GUACA", "GUADALUPE", "GUAPOTÁ", "GUAVATÁ", "GÜEPSA", "HATO", "JESÚS MARÍA", "JORDÁN", 
+                "LA BELLEZA", "LANDÁZURI", "LA PAZ", "LEBRIJA", "LOS SANTOS", "MACARAVITA", "MÁLAGA", 
+                "MATANZA", "MOGOTES", "MOLAGAVITA", "OCAMONTE", "OIBA", "ONZAGA", "PALMAR", "PALMAS DEL SOCORRO", 
+                "PÁRAMO", "PIEDECUESTA", "PINCHOTE", "PUENTE NACIONAL", "PUERTO PARRA", "PUERTO WILCHES", 
+                "RIONEGRO", "SABANA DE TORRES", "SAN ANDRÉS", "SAN BENito", "SAN GIL", "SAN JOAQUÍN", 
+                "SAN JOSÉ DE MIRANDA", "SAN MIGUEL", "SAN VICENTE DE CHUCURÍ", "SANTA BÁRBARA", 
+                "SANTA HELENA DEL OPÓN", "SIMACOTA", "SOCORRO", "SUAITA", "SUCRE", "SURATÁ", "TONA", 
+                "VALLE DE SAN JOSÉ", "VÉLEZ", "VETAS", "VILLANUEVA", "ZAPATOCA"
+            ],
+            "SUCRE": [
+                "SINCELEJO", "BUENAVISTA", "CAIMITO", "COLOSÓ", "COROZAL", "COVEÑAS", "CHALÁN", "EL ROBLE", 
+                "GALERAS", "GUARANDA", "LA UNIÓN", "LOS PALMITOS", "MAJAGUAL", "MORROA", "OVEJES", 
+                "PALMITO", "SAMPUÉS", "SAN BENITO ABAD", "SAN JUAN DE BETULIA", "SAN MARCOS", "SAN ONOFRE", 
+                "SAN PEDRO", "SAN LUIS DE SINCÉ", "SUCRE", "SANTIAGO DE TOLÚ", "SAN JOSÉ DE TOLUVIEJO"
+            ],
+            "TOLIMA": [
+                "IBAGUÉ", "ALPUJARRA", "ALVARADO", "AMBALEMA", "ANZOÁTEGUI", "ARMERO", "ATACO", "CAJAMARCA", 
+                "CARMEN DE APICALÁ", "CASABIANCA", "CHAPARRAL", "COELLO", "COYAIMA", "CUNDAY", "DOLORES", 
+                "ESPINAL", "FALAN", "FLANDES", "FRESNO", "GUAMO", "HERVEO", "HONDA", "ICONONZO", "LÉRIDA", 
+                "LÍBANO", "SAN SEBASTIÁN DE MARIQUITA", "MELGAR", "MURILLO", "NATAGAIMA", "ORTEGA", 
+                "PALOCABILDO", "PIEDRAS", "PLANADAS", "PRADO", "PURIFICACIÓN", "RIOBLANCO", "RONCESVALLES", 
+                "ROVIRA", "SALDAÑA", "SAN ANTONIO", "SAN LUIS", "SANTA ISABEL", "SUÁREZ", "VALLE DE SAN JUAN", 
+                "VENADILLO", "VILLAHERMOSA", "VILLARRICA"
+            ],
+            "VALLE DEL CAUCA": [
+                "SANTIAGO DE CALI", "ALCALÁ", "ANDALUCÍA", "ANSERMANUEVO", "ARGELIA", "BOLÍVAR", 
+                "BUENAVENTURA", "GUADALAJARA DE BUGA", "BUGALAGRANDE", "CAICEDONIA", "CALIMA", "CANDELARIA", 
+                "CARTAGO", "DAGUA", "EL ÁGUILA", "EL CAIRO", "EL CERRITO", "EL DOVIO", "FLORIDA", "GINEBRA", 
+                "GUACARÍ", "JAMUNDÍ", "LA CUMBRE", "LA UNIÓN", "LA VICTORIA", "OBANDO", "PALMIRA", "PRADERA", 
+                "RESTREPO", "RIOFRÍO", "ROLDANILLO", "SAN PEDRO", "SEVILLA", "TORO", "TRUJILLO", "TULUÁ", 
+                "ULLOA", "VERSALLES", "VIJES", "YOTOCO", "YUMBO", "ZARZAL"
+            ],
+            "ARAUCA": [
+                "ARAUCA", "ARAUQUITA", "CRAVO NORTE", "FORTUL", "PUERTO RONDÓN", "SARAVENA", "TAME"
+            ],
+            "CASANARE": [
+                "YOPAL", "AGUAZUL", "CHÁMEZA", "HATO COROZAL", "LA SALINA", "MANÍ", "MONTERREY", "NUNCHÍA", 
+                "OROCUÉ", "PAZ DE ARIPORO", "PORE", "RECETOR", "SABANALARGA", "SÁCAMA", "SAN LUIS DE PALENQUE", 
+                "TÁMARA", "TAURAMENA", "TRINIDAD", "VILLANUEVA"
+            ],
+            "PUTUMAYO": [
+                "MOCOA", "COLÓN", "ORITO", "PUERTO ASÍS", "PUERTO CAICEDO", "PUERTO GUZMÁN", "PUERTO LEGUÍZAMO", 
+                "SIBUNDOY", "SAN FRANCISCO", "SAN MIGUEL", "SANTIAGO", "VALLE DEL GUAMUEZ", "VILLAGARZÓN"
+            ],
+            "ARCHIPIÉLAGO DE SAN ANDRÉS, PROVIDENCIA Y SANTA CATALINA": [
+                "SAN ANDRÉS", "PROVIDENCIA"
+            ],
+            "AMAZONAS": [
+                "LETICIA", "EL ENCANTO", "LA CHORRERA", "LA PEDRERA", "LA VICTORIA", "MIRITÍ - PARANÁ", 
+                "PUERTO ALEGRÍA", "PUERTO ARICA", "PUERTO NARIÑO", "PUERTO SANTANDER", "TARAPACÁ"
+            ],
+            "GUAINÍA": [
+                "INÍRIDA", "BARRANCOMINAS", "SAN FELIPE", "PUERTO COLOMBIA", "LA GUADALUPE", "CACAHUAL", 
+                "PANA PANA", "MORICHAL"
+            ],
+            "GUAVIARE": [
+                "SAN JOSÉ DEL GUAVIARE", "CALAMAR", "EL RETORNO", "MIRAFLORES"
+            ],
+            "VAUPÉS": [
+                "MITÚ", "CARURÚ", "PACOA", "TARAIRA", "PAPUNAHUA", "YAVARATÉ"
+            ],
+            "VICHADA": [
+                "PUERTO CARREÑO", "LA PRIMAVERA", "SANTA ROSALÍA", "CUMARIBO"
+            ]
+        };
+
+        // Elementos del DOM
+        const departamentoSelect = document.getElementById('departamento');
+        const municipioSelect = document.getElementById('municipio');
+        const selectedDepto = document.getElementById('selectedDepto');
+        const selectedMuni = document.getElementById('selectedMuni');
+
+        // Event listener para cuando cambie la selección de departamento
+        departamentoSelect.addEventListener('change', function() {
+            const selectedDept = this.value;
+            
+            // Limpiar el selector de municipios
+            municipioSelect.innerHTML = '';
+            
+            if (selectedDept) {
+                // Mostrar mensaje de carga
+                const loadingOption = document.createElement('option');
+                loadingOption.textContent = 'Cargando municipios...';
+                loadingOption.value = '';
+                municipioSelect.appendChild(loadingOption);
+                municipioSelect.disabled = false;
+                
+                // Simular un pequeño retraso para la carga
+                setTimeout(() => {
+                    // Obtener los municipios para el departamento seleccionado
+                    const municipios = municipiosPorDepartamento[selectedDept];
+                    
+                    // Limpiar el selector
+                    municipioSelect.innerHTML = '';
+                    
+                    // Agregar la opción por defecto
+                    const defaultOption = document.createElement('option');
+                    defaultOption.textContent = '-- Seleccione un municipio --';
+                    defaultOption.value = '';
+                    municipioSelect.appendChild(defaultOption);
+                    
+                    // Agregar los municipios al selector
+                    if (municipios && municipios.length > 0) {
+                        municipios.forEach(municipio => {
+                            const option = document.createElement('option');
+                            option.textContent = municipio;
+                            option.value = municipio;
+                            municipioSelect.appendChild(option);
+                        });
+                    } else {
+                        const noDataOption = document.createElement('option');
+                        noDataOption.textContent = 'No hay municipios disponibles';
+                        noDataOption.value = '';
+                        municipioSelect.appendChild(noDataOption);
+                    }
+                    
+                    // Actualizar la visualización
+                    selectedDepto.textContent = selectedDept;
+                    selectedMuni.textContent = 'Ninguno';
+                }, 300);
+            } else {
+                municipioSelect.disabled = true;
+                const defaultOption = document.createElement('option');
+                defaultOption.textContent = '-- Primero seleccione un departamento --';
+                defaultOption.value = '';
+                municipioSelect.appendChild(defaultOption);
+                
+                // Actualizar la visualización
+                selectedDepto.textContent = 'Ninguno';
+                selectedMuni.textContent = 'Ninguno';
+            }
+        });
+
+        // Event listener para cuando cambie la selección de municipio
+        municipioSelect.addEventListener('change', function() {
+            selectedMuni.textContent = this.value || 'Ninguno';
+        });
+
+        // Inicializar el selector de municipios como deshabilitado
+        municipioSelect.disabled = true;
+    </script>
+</body>
+</html>
+            <div class="field">
+              <label>3. Municipio / Área no municipalizada</label>
+              <input type="text" name="municipio">
+            </div>
+            <div class="field">
+              <label>4. Territorio</label>
+              <input type="text" name="territorio">
+            </div>
+        
+        <div class="field col-6">
+          <label>5. Microterritorio</label>
+          <input type="text" name="microterritorio">
+        </div>
+        <div class="field col-6">
+          <label>6. Corregimiento / Centro poblado / Vereda / Localidad / Barrio / Resguardo indígena</label>
+          <input type="text" name="asentamiento">
+        </div>
+        <div class="field col-8">
+          <label>7. Dirección</label>
+          <input type="text" name="direccion">
+        </div>
+        <div class="field col-4">
+          <label>8. Geopunto (longitud, latitud)</label>
+          <input type="text" name="geopunto" placeholder="-74.08, 4.61">
+        </div>
+        <div class="field col-12">
+          <label>9. Ubicación del hogar (si no hay nomenclatura)</label>
+          <input type="text" name="referencia_hogar">
+        </div>
+        <div class="field col-4">
+          <label>10. ID del hogar</label>
+          <input type="text" name="id_hogar">
+        </div>
+        <div class="field col-4">
+          <label>11. ID de la familia</label>
+          <input type="text" name="id_familia">
+        </div>
+        <div class="field col-4">
+          <label>12. Estrato socioeconómico</label>
+          <select name="estrato">
+            <option value="">Seleccione…</option>
+            <option>1. Bajo-Bajo</option><option>2. Bajo</option><option>3. Medio-Bajo</option>
+            <option>4. Medio</option><option>5. Medio-Alto</option><option>6. Alto</option>
+          </select>
+        </div>
+        <div class="field col-4">
+          <label>13. Número de hogares en la vivienda</label>
+          <input type="number" name="num_hogares" min="0">
+        </div>
+        <div class="field col-4">
+          <label>14. Número de familias en la vivienda</label>
+          <input type="number" name="num_familias" min="0">
+        </div>
+        <div class="field col-4">
+          <label>15. Número de personas en la vivienda</label>
+          <input type="number" name="num_personas_vivienda" min="0">
+        </div>
+        <div class="field col-4">
+          <label>16. ID del Equipo Básico de Salud (EBS)</label>
+          <input type="text" name="id_ebs">
+        </div>
+        <div class="field col-8">
+          <label>17. Prestador primario / Organismo de adscripción del EBS</label>
+          <input type="text" name="prestador">
+        </div>
+        <div class="field col-4">
+          <label>18. Tipo de identificación (responsable)</label>
+          <input type="text" name="tipo_id_resp">
+        </div>
+        <div class="field col-4">
+          <label>19. Número de identificación (responsable)</label>
+          <input type="text" name="num_id_resp">
+        </div>
+        <div class="field col-4">
+          <label>20. Responsable de la evaluación</label>
+          <input type="text" name="responsable_eval">
+        </div>
+        <div class="field col-6">
+          <label>21. Perfil de quien realiza la evaluación</label>
+          <input type="text" name="perfil_eval">
+        </div>
+        <div class="field col-3">
+          <label>22. Código de la ficha</label>
+          <input type="text" name="codigo_ficha">
+        </div>
+        <div class="field col-3">
+          <label>23. Fecha de diligenciamiento</label>
+          <input type="date" name="fecha_ficha">
+        </div>
+      </div>
+    </div>
+      </div>
+    <!-- 2. CARACTERIZACIÓN DE LA FAMILIA (24 - 50) -->
+    <div class="section">
+      <h2>2. Caracterización de la Familia</h2>
+
+      <h3>2.1 Estructura y contexto familiar</h3>
+      <div class="four-columns">
+        <div class="field col-6">
+          <label>24. Tipo de familia</label>
+          <select name="tipo_familia">
+            <option>Nuclear biparental</option><option>Nuclear monoparental</option>
+            <option>Extenso biparental</option><option>Extenso monoparental</option>
+            <option>Compuesto biparental</option><option>Compuesto monoparental</option>
+            <option>Unipersonal</option>
+          </select>
+        </div>
+        <div class="field col-6">
+          <label>25. Número de personas que conforman la familia</label>
+          <input type="number" name="num_personas_familia" min="0">
+        </div>
+        <div class="one-colum">
+          <label>26. Estructura y dinámica familiar (Familiograma)</label>
+          <textarea name="familiograma" placeholder="Describa la estructura y dinámica familiar."></textarea>
+          <div class="hint">Seleccione riesgo identificado:</div>
+          <div class="inline-options">
+            <label><input type="checkbox" name="riesgo_biologico"> Riesgo Biológico</label>
+            <label><input type="checkbox" name="riesgo_psicologico"> Riesgo Psicológico</label>
+            <label><input type="checkbox" name="riesgo_social"> Riesgo Social</label>
+          </div>
+          <label>Observaciones</label>
+          <textarea name="obs_familiograma"></textarea>
+        </div>
+        <div class="one-colum">
+          <label>27. Funcionalidad de la familia (APGAR familiar)</label>
+          <select name="apgar">
+            <option>Normal (17-20)</option>
+            <option>Disfunción leve (13-16)</option>
+            <option>Disfunción moderada (10-12)</option>
+            <option>Disfunción severa (≤9)</option>
+          </select>
+        </div>
+        <div class="field col-6">
+          <label>28. ¿Se identifica cuidador principal?</label>
+          <div class="inline-options">
+            <label><input type="radio" name="cuidador_principal" value="si"> SI</label>
+            <label><input type="radio" name="cuidador_principal" value="no"> NO</label>
+          </div>
+        </div>
+        <div class="field col-6">
+          <label>29. Si hay cuidador: escala ZARIT (puntaje)</label>
+          <select name="zarit">
+            <option>Ausencia de sobrecarga (≤46)</option>
+            <option>Sobrecarga ligera (47-55)</option>
+            <option>Sobrecarga intensa (≥56)</option>
+          </select>
+        </div>
+        <div class="field col-12">
+          <label>30. Interrelaciones con el contexto sociocultural (ECOMAPA)</label>
+          <textarea name="ecomapa"></textarea>
+        </div>
+        <div class="field col-3">
+          <label>31. Familia con niñas, niños y adolescentes</label>
+          <div class="inline-options">
+            <label><input type="radio" name="tiene_nna" value="si"> SI</label>
+            <label><input type="radio" name="tiene_nna" value="no"> NO</label>
+          </div>
+        </div>
+        <div class="field col-3">
+          <label>32. Familia con personas adultas mayores</label>
+          <div class="inline-options">
+            <label><input type="radio" name="tiene_amayor" value="si"> SI</label>
+            <label><input type="radio" name="tiene_amayor" value="no"> NO</label>
+          </div>
+        </div>
+        <div class="field col-3">
+          <label>33. Familia que convive con personas con discapacidad</label>
+          <div class="inline-options">
+            <label><input type="radio" name="tiene_discap" value="si"> SI</label>
+            <label><input type="radio" name="tiene_discap" value="no"> NO</label>
+          </div>
+        </div>
+        <div class="field col-3">
+          <label>34. Gestante en la familia</label>
+          <div class="inline-options">
+            <label><input type="radio" name="tiene_gestante" value="si"> SI</label>
+            <label><input type="radio" name="tiene_gestante" value="no"> NO</label>
+          </div>
+        </div>
+        <div class="field col-4">
+          <label>35. Familia víctima del conflicto armado</label>
+          <div class="inline-options">
+            <label><input type="radio" name="victima_conflicto" value="si"> SI</label>
+            <label><input type="radio" name="victima_conflicto" value="no"> NO</label>
+          </div>
+        </div>
+        <div class="field col-8">
+          <label>36. Convive con persona con enfermedad transmisible</label>
+            <div class="stacked-options">
+       <label><input type="checkbox" name="enf_tx_tb"> TB</label>
+        <label><input type="checkbox" name="enf_tx_lepra"> Lepra</label>
+        <label><input type="checkbox" name="enf_tx_escabiosis"> Escabiosis/u otras</label>
+        <label><input type="checkbox" name="enf_tx_dengue"> Dengue</label>
+        <label><input type="checkbox" name="enf_tx_malaria"> Malaria</label>
+        <label><input type="checkbox" name="enf_tx_chagas"> Chagas</label>
+        <label><input type="checkbox" name="enf_tx_hepa"> Hepatitis A</label>
+        <label><input type="checkbox" name="enf_tx_inmuno"> Inmunoprevenible (varicela, parotiditis, otra)</label>
+      </div>
+        </div>
+        <div class="field col-12">
+          <label>37. Vivencia de sucesos vitales (positivos o negativos)</label>
+          <div class="inline-options">
+            <label><input type="radio" name="sucesos_vitales" value="si"> SI</label>
+            <label><input type="radio" name="sucesos_vitales" value="no"> NO</label>
+          </div>
+          <textarea name="sucesos_vitales_detalle" placeholder="Ej. ingreso a estudiar, muerte familiar, accidente, separación, etc."></textarea>
+        </div>
+        <div class="field col-12">
+          <label>38. Situación de vulnerabilidad social</label>
+          <div class="inline-options">
+            <label><input type="radio" name="vulnerabilidad_social" value="si"> SI</label>
+            <label><input type="radio" name="vulnerabilidad_social" value="no"> NO</label>
+          </div>
+          <textarea name="vulnerabilidad_social_detalle" placeholder="Consumo SPA, explotación sexual, trabajo infantil, conflictos, VIF, trastorno mental, etc."></textarea>
+        </div>
+        <div class="field col-12">
+          <label>39. Prácticas de cuidado críticas que ponen en riesgo la salud</label>
+          <div class="inline-options">
+            <label><input type="radio" name="practicas_criticas" value="si"> SI</label>
+            <label><input type="radio" name="practicas_criticas" value="no"> NO</label>
+          </div>
+          <textarea name="practicas_criticas_detalle" placeholder="Hábitos alimentarios, situaciones de abandono, etc."></textarea>
+        </div>
+        <div class="field col-12">
+          <label>40. Antecedentes de salud (familia)</label>
+          <div class="inline-options">
+            <label><input type="checkbox" name="ant_ca"> Cáncer</label>
+            <label><input type="checkbox" name="ant_hta"> HTA</label>
+            <label><input type="checkbox" name="ant_dm"> Diabetes</label>
+            <label><input type="checkbox" name="ant_asma"> Asma</label>
+            <label><input type="checkbox" name="ant_cardiaca"> Enfermedad cardiaca</label>
+            <label><input type="checkbox" name="ant_otra"> Otra</label>
+            <label><input type="checkbox" name="ant_ninguna"> Ninguna</label>
+          </div>
+          <label>40.1 Si aplica, indique cuáles</label>
+          <textarea name="ant_detalle"></textarea>
+        </div>
+        <div class="field col-12">
+          <label>41. ¿Cómo obtiene sus alimentos?</label>
+          <div class="inline-options">
+            <label><input type="checkbox" name="alimentos_cultiva"> Cultiva</label>
+            <label><input type="checkbox" name="alimentos_cria"> Cría de animales</label>
+            <label><input type="checkbox" name="alimentos_caceria"> Cacería</label>
+            <label><input type="checkbox" name="alimentos_recoleccion"> Recolección</label>
+            <label><input type="checkbox" name="alimentos_trueque"> Trueque/intercambio</label>
+            <label><input type="checkbox" name="alimentos_compra"> Compra</label>
+            <label><input type="checkbox" name="alimentos_estado"> Asistencia del Estado</label>
+            <label><input type="checkbox" name="alimentos_humanitaria"> Ayuda humanitaria</label>
+            <label><input type="checkbox" name="alimentos_otra"> Otra</label>
+          </div>
+          <label>41.1 ¿Cuál?</label>
+          <input type="text" name="alimentos_cual">
+        </div>
+      </div>
+
+      <h3>2.3 Prácticas o condiciones protectoras</h3>
+      <div class="grid">
+        <div class="field col-6">
+          <label>42. Hábitos de vida saludable (contextuales/culturales)</label>
+          <div class="inline-options">
+            <label><input type="radio" name="habitos_saludables" value="si"> SI</label>
+            <label><input type="radio" name="habitos_saludables" value="no"> NO</label>
+          </div>
+        </div>
+        <div class="field col-6">
+          <label>43. Recursos socioemocionales que potencian el cuidado</label>
+          <div class="inline-options">
+            <label><input type="radio" name="recursos_socioemocionales" value="si"> SI</label>
+            <label><input type="radio" name="recursos_socioemocionales" value="no"> NO</label>
+          </div>
+        </div>
+        <div class="field col-6">
+          <label>44. Prácticas de cuidado y protección de los entornos</label>
+          <div class="inline-options">
+            <label><input type="radio" name="cuidado_entornos" value="si"> SI</label>
+            <label><input type="radio" name="cuidado_entornos" value="no"> NO</label>
+          </div>
+        </div>
+        <div class="field col-6">
+          <label>45. Prácticas para relaciones sanas y constructivas</label>
+          <div class="inline-options">
+            <label><input type="radio" name="relaciones_sanas" value="si"> SI</label>
+            <label><input type="radio" name="relaciones_sanas" value="no"> NO</label>
+          </div>
+        </div>
+        <div class="field col-6">
+          <label>46. Recursos sociales/comunitarios para redes colectivas</label>
+          <div class="inline-options">
+            <label><input type="radio" name="redes_colectivas" value="si"> SI</label>
+            <label><input type="radio" name="redes_colectivas" value="no"> NO</label>
+          </div>
+        </div>
+        <div class="field col-6">
+          <label>47. Prácticas para conservar autonomía y capacidad funcional (personas mayores)</label>
+          <div class="inline-options">
+            <label><input type="radio" name="autonomia_mayores" value="si"> SI</label>
+            <label><input type="radio" name="autonomia_mayores" value="no"> NO</label>
+          </div>
+        </div>
+        <div class="field col-6">
+          <label>48. Prácticas para la prevención de enfermedades</label>
+          <div class="inline-options">
+            <label><input type="radio" name="prevencion_enfermedades" value="si"> SI</label>
+            <label><input type="radio" name="prevencion_enfermedades" value="no"> NO</label>
+          </div>
+        </div>
+        <div class="field col-6">
+          <label>49. Prácticas de cuidado desde saberes ancestrales/tradicionales</label>
+          <div class="inline-options">
+            <label><input type="radio" name="saberes_ancestrales" value="si"> SI</label>
+            <label><input type="radio" name="saberes_ancestrales" value="no"> NO</label>
+          </div>
+        </div>
+        <div class="field col-6">
+          <label>50. Capacidades para el ejercicio del derecho a la salud</label>
+          <div class="inline-options">
+            <label><input type="radio" name="ejercicio_derecho_salud" value="si"> SI</label>
+            <label><input type="radio" name="ejercicio_derecho_salud" value="no"> NO</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3. CARACTERIZACIÓN DE LOS INTEGRANTES (51 - 83) -->
+    <div class="section">
+      <h2>3. Caracterización de los integrantes de la familia</h2>
+      <p class="muted">Agregue un registro por cada integrante. Puede añadir/eliminar integrantes según sea necesario.</p>
+
+      <div id="miembros"></div>
+      <div class="controls">
+        <button class="btn" type="button" onclick="agregarMiembro()">+ Agregar integrante</button>
+        <button class="btn secondary" type="button" onclick="colapsarMiembros()">Colapsar/Expandir</button>
+      </div>
+    </div>
+
+    <!-- 4. CARACTERIZACIÓN DEL ENTORNO Y VIVIENDA (84 - 96) -->
+    <div class="section">
+      <h2>4. Características del entorno y de la vivienda</h2>
+      <div class="grid">
+        <div class="field col-6">
+          <label>84. Tipo de vivienda</label>
+          <select name="tipo_vivienda">
+            <option>Casa</option><option>Casa Indígena</option><option>Carpa</option>
+            <option>Apartamento</option><option>Pieza/ Cuarto en Inquilinato</option>
+            <option>Contenedor</option><option>Embarcación</option><option>Vagón</option>
+            <option>Refugio Natural</option><option>Cueva</option><option>Puente</option><option>Otro</option>
+          </select>
+          <input type="text" name="tipo_vivienda_cual" placeholder="84.1 ¿Cuál? (si aplica)">
+        </div>
+        <div class="field col-6">
+          <label>85. Material predominante de las paredes</label>
+          <select name="material_pared">
+            <option>Bloque/ladrillo/piedra/madera pulida</option>
+            <option>Tapia pisada / adobe</option><option>Bahareque</option>
+            <option>Material prefabricado</option><option>Madera burda/tabla/tablón</option>
+            <option>Guadua/caña/esterilla u otro vegetal</option>
+            <option>Zinc/tela/lona/cartón/latas/desechos/plástico</option>
+            <option>Sin paredes</option><option>Otro</option>
+          </select>
+          <input type="text" name="material_pared_cual" placeholder="85.1 ¿Cuál? (si aplica)">
+        </div>
+        <div class="field col-6">
+          <label>86. Material predominante del piso</label>
+          <select name="material_piso">
+            <option>Alfombra/mármol/parqué/madera pulida y lacada</option>
+            <option>Baldosa/vinilo/tableta/ladrillo</option>
+            <option>Cemento/gravilla</option>
+            <option>Madera burda o en mal estado</option>
+            <option>Tierra o arena</option>
+            <option>Otro</option>
+          </select>
+          <input type="text" name="material_piso_cual" placeholder="86.1 ¿Cuál? (si aplica)">
+        </div>
+        <div class="field col-6">
+          <label>87. Material predominante del techo</label>
+          <select name="material_techo">
+            <option>Concreto</option><option>Tejas de barro</option><option>Fibrocemento</option>
+            <option>Zinc</option><option>Palma o paja</option><option>Plástico</option>
+            <option>Desechos (cartón, lata, tela, sacos, etc.)</option><option>Otro</option>
+          </select>
+          <input type="text" name="material_techo_cual" placeholder="87.1 ¿Cuál? (si aplica)">
+        </div>
+        <div class="tw-colum">
+          <label>88. Número de cuartos/dormitorios</label>
+          <input type="number" name="num_cuartos" min="0">
+        </div>
+        <div class="field col-6">
+          <label>89. ¿Hacinamiento?</label>
+          <div class="inline-options">
+            <label><input type="radio" name="hacinamiento" value="si"> SI</label>
+            <label><input type="radio" name="hacinamiento" value="no"> NO</label>
+          </div>
+        </div>
+        <div class="one-colum">
+          <label>90. Escenarios de riesgo de accidente en la vivienda</label>
+          <div class="inline-options">
+            <label><input type="checkbox" name="acc_obj_cortantes"> Objetos cortantes/punzantes al alcance de NNA</label>
+            <label><input type="checkbox" name="acc_quimicos"> Sustancias químicas al alcance de NNA</label>
+            <label><input type="checkbox" name="acc_medicamentos"> Medicamentos al alcance de NNA</label>
+            <label><input type="checkbox" name="acc_velas"> Velas/velones/incienso encendidos</label>
+            <label><input type="checkbox" name="acc_electrico"> Conexiones eléctricas en mal estado/sobrecargadas</label>
+            <label><input type="checkbox" name="acc_piezas_peq"> Botones/canicas/objetos pequeños al alcance</label>
+            <label><input type="checkbox" name="acc_pasillos"> Pasillos obstruidos</label>
+            <label><input type="checkbox" name="acc_resbaladizo"> Superficies resbaladizas</label>
+            <label><input type="checkbox" name="acc_tanques"> Tanques/recipientes de agua sin tapa</label>
+            <label><input type="checkbox" name="acc_escaleras"> Escaleras sin protección</label>
+            <label><input type="checkbox" name="acc_ninguno"> Ninguno</label>
+          </div>
+        </div>
+        <div class="one-colum">
+          <label>91. Desde la vivienda se puede acceder fácilmente a:</label>
+          <div class="inline-options">
+            <label><input type="checkbox" name="acceso_transporte"> Medios de transporte</label>
+            <label><input type="checkbox" name="acceso_recreacion"> Parques/áreas deportivas/centros sociales</label>
+            <label><input type="checkbox" name="acceso_educacion"> Instituciones educativas</label>
+            <label><input type="checkbox" name="acceso_salud"> Servicios de salud</label>
+          </div>
+        </div>
+        <div class="field col-6">
+          <label>92. Fuente de energía o combustible para cocinar</label>
+          <select name="energia_cocinar">
+            <option>Electricidad</option><option>Gas natural</option><option>Gas LP (propano)</option>
+            <option>Leña/madera/carbón de leña</option><option>Petróleo/gasolina/kerosén/alcohol</option>
+            <option>Carbón mineral</option><option>Materiales de desecho</option><option>Otro</option>
+          </select>
+          <input type="text" name="energia_cual" placeholder="92.1 ¿Cuál? (si aplica)">
+        </div>
+        <div class="one-colum">
+          <label>93. ¿Criaderos o reservorios cercanos que favorezcan vectores?</label>
+          <div class="inline-options">
+            <label><input type="radio" name="vectores" value="si"> SI</label>
+            <label><input type="radio" name="vectores" value="no"> NO</label>
+          </div>
+        </div>
+        <div class="one-colum">
+          <label>94. Cerca de la vivienda hay:</label>
+          <div class="inline-options">
+            <label><input type="checkbox" name="cercano_cultivos"> Cultivos</label>
+            <label><input type="checkbox" name="cercano_apriscos"> Apriscos</label>
+            <label><input type="checkbox" name="cercano_porquerizas"> Porquerizas</label>
+            <label><input type="checkbox" name="cercano_galpones"> Galpones</label>
+            <label><input type="checkbox" name="cercano_baldios"> Terrenos baldíos</label>
+            <label><input type="checkbox" name="cercano_plagas"> Presencia de plagas</label>
+            <label><input type="checkbox" name="cercano_ruido"> Ruido/sonidos desagradables</label>
+            <label><input type="checkbox" name="cercano_olores"> Malos olores</label>
+            <label><input type="checkbox" name="cercano_excretas"> Sitios de disposición de excretas</label>
+            <label><input type="checkbox" name="cercano_rellenos"> Rellenos sanitarios/botaderos</label>
+            <label><input type="checkbox" name="cercano_industrias"> Industrias contaminantes</label>
+            <label><input type="checkbox" name="cercano_visual"> Contaminación visual</label>
+            <label><input type="checkbox" name="cercano_rio"> Río/quebrada</label>
+            <label><input type="checkbox" name="cercano_ptar"> Planta de tratamiento de aguas residuales</label>
+            <label><input type="checkbox" name="cercano_canales"> Canales de agua lluvia</label>
+            <label><input type="checkbox" name="cercano_vias"> Vías de tráfico vehicular</label>
+            <label><input type="checkbox" name="cercano_quemas"> Quemas a cielo abierto</label>
+          </div>
+          <input type="text" name="cercano_especifique" placeholder="94.1 Especifique">
+        </div>
+        <div class="one-colum">
+          <label>95. ¿Actividad económica al interior de la vivienda?</label>
+          <div class="inline-options">
+            <label><input type="radio" name="actividad_vivienda" value="si"> SI</label>
+            <label><input type="radio" name="actividad_vivienda" value="no"> NO</label>
+          </div>
+        </div>
+        <div class="field col-12">
+          <label>96. Animales que conviven con la familia (seleccione e indique cantidad)</label>
+          <div class="inline-options">
+            <label><input type="checkbox" name="ani_perros"> Perros</label>
+            <label><input type="checkbox" name="ani_gatos"> Gatos</label>
+            <label><input type="checkbox" name="ani_porcinos"> Porcinos</label>
+            <label><input type="checkbox" name="ani_bovidos"> Bóvidos</label>
+            <label><input type="checkbox" name="ani_equidos"> Équidos</label>
+            <label><input type="checkbox" name="ani_ovinos"> Ovinos/Caprinos</label>
+            <label><input type="checkbox" name="ani_aves_prod"> Aves de producción</label>
+            <label><input type="checkbox" name="ani_aves_orn"> Aves ornamentales</label>
+            <label><input type="checkbox" name="ani_peces"> Peces/hamster</label>
+            <label><input type="checkbox" name="ani_cobayos"> Cobayos/conejos</label>
+            <label><input type="checkbox" name="ani_silvestres"> Animales silvestres</label>
+            <label><input type="checkbox" name="ani_otro"> Otro</label>
+            <label><input type="checkbox" name="ani_ninguno"> Ninguno</label>
+          </div>
+          <div class="grid">
+            <div class="field col-3"><label>Cant. Perros</label><input type="number" name="cant_perros" min="0"></div>
+            <div class="field col-3"><label>Cant. Gatos</label><input type="number" name="cant_gatos" min="0"></div>
+            <div class="field col-3"><label>Cant. Aves prod.</label><input type="number" name="cant_aves_prod" min="0"></div>
+            <div class="field col-3"><label>Cant. Otros</label><input type="number" name="cant_otros" min="0"></div>
+          </div>
+          <input type="text" name="animales_cual" placeholder="96.1 ¿Cuál? (si aplica)">
+          <input type="number" name="animales_cantidad_total" placeholder="96.2 Registrar Cantidad" min="0">
+        </div>
+      </div>
+    </div>
+
+    <!-- 4.2 Oficios u ocupaciones en peridomicilio (campo libre + check) -->
+    <div class="section">
+      <h2>4.2 Oficios u ocupaciones en la vivienda o peridomicilio</h2>
+      <div class="grid">
+        <div class="field col-12">
+          <div class="inline-options">
+            <label><input type="checkbox" name="oficio_agricola"> Actividades agrícolas</label>
+            <label><input type="checkbox" name="oficio_ganadero"> Actividades pecuarias</label>
+            <label><input type="checkbox" name="oficio_mineria"> Extracción minera</label>
+            <label><input type="checkbox" name="oficio_comercio"> Comercio/venta</label>
+            <label><input type="checkbox" name="oficio_manufactura"> Manufactura</label>
+            <label><input type="checkbox" name="oficio_ninguno"> Ninguno</label>
+            <label><input type="checkbox" name="oficio_otro"> Otro</label>
+          </div>
+          <input type="text" name="oficio_otro_cual" placeholder="Especifique si eligió 'Otro'">
+        </div>
+      </div>
+    </div>
+
+    <!-- 4.3 Agua y saneamiento básico (97 - 100) -->
+    <div class="section">
+      <h2>4.3 Agua y saneamiento básico</h2>
+      <div class="grid">
+        <div class="field col-6">
+          <label>97. Principal fuente de agua para consumo humano</label>
+          <select name="fuente_agua">
+            <option>Acueducto (empresa prestadora)</option>
+            <option>Agua embotellada/bolsa</option>
+            <option>Acueducto veredal/comunitario</option>
+            <option>Pila pública</option>
+            <option>Carro tanque</option>
+            <option>Abasto con distribución comunitaria</option>
+            <option>Pozo con bomba</option>
+            <option>Pozo sin bomba/aljibe/jagüey/barreno</option>
+            <option>Laguna/jagüey</option>
+            <option>Río/quebrada/manantial/nacimiento</option>
+            <option>Aguas lluvias</option>
+            <option>Aguatero</option>
+            <option>Otro</option>
+          </select>
+          <input type="text" name="fuente_agua_cual" placeholder="97.1 ¿Cuál? (si aplica)">
+        </div>
+        <div class="field col-6">
+          <label>98. Sistema de disposición de excretas</label>
+          <select name="disp_excretas">
+            <option>Sanitario conectado al alcantarillado</option>
+            <option>Sanitario y letrina</option>
+            <option>Sanitario conectado a pozo séptico</option>
+            <option>Sanitario ecológico seco</option>
+            <option>Sanitario sin conexión</option>
+            <option>Sanitario con disposición a fuente hídrica</option>
+            <option>Campo abierto</option>
+            <option>Otro</option>
+          </select>
+          <input type="text" name="disp_excretas_cual" placeholder="98.1 ¿Cuál? (si aplica)">
+        </div>
+        <div class="field col-6">
+          <label>99. Disposición de aguas residuales domésticas</label>
+          <select name="disp_residuales">
+            <option>Alcantarillado</option><option>Pozo séptico</option><option>Campo de oxidación</option>
+            <option>Biofiltro</option><option>Campo abierto</option><option>Fuente hídrica</option>
+            <option>Otro</option>
+          </select>
+          <input type="text" name="disp_residuales_cual" placeholder="99.1 ¿Cuál? (si aplica)">
+        </div>
+        <div class="field col-6">
+          <label>100. Disposición final de residuos sólidos ordinarios</label>
+          <select name="disp_residuos">
+            <option>Recolección por servicio de aseo</option>
+            <option>Enterramiento</option>
+            <option>Quema a campo abierto</option>
+            <option>Disposición a fuentes de agua cercana</option>
+            <option>Disposición a campo abierto</option>
+            <option>Otro</option>
+          </select>
+          <input type="text" name="disp_residuos_cual" placeholder="100.1 ¿Cuál? (si aplica)">
+        </div>
+      </div>
+    </div>
+
+    <div class="sticky-footer">
+      <button class="btn" type="submit">Enviar formulario</button>
+      <button class="btn secondary" type="reset">Limpiar</button>
+    </div>
+
+  </form>
+
+  <template id="tpl-miembro">
+    <details class="member-card" open>
+      <summary>Integrante <span class="muted">(haga clic para desplegar/ocultar)</span></summary>
+      <div class="grid">
+        <!-- IDENTIFICACIÓN (51 - 66, 69) -->
+        <div class="field col-3"><label>51. Primer nombre</label><input type="text" name="m[IDX][primer_nombre]"></div>
+        <div class="field col-3"><label>52. Segundo nombre</label><input type="text" name="m[IDX][segundo_nombre]"></div>
+        <div class="field col-3"><label>53. Primer apellido</label><input type="text" name="m[IDX][primer_apellido]"></div>
+        <div class="field col-3"><label>54. Segundo apellido</label><input type="text" name="m[IDX][segundo_apellido]"></div>
+        <div class="field col-3"><label>55. Tipo de identificación</label><input type="text" name="m[IDX][tipo_id]"></div>
+        <div class="field col-3"><label>56. Número identificación</label><input type="text" name="m[IDX][num_id]"></div>
+        <div class="field col-3"><label>57. Fecha de nacimiento (AAAA-MM-DD)</label><input type="date" name="m[IDX][fecha_nac]"></div>
+        <div class="field col-3">
+          <label>58. Sexo</label>
+          <select name="m[IDX][sexo]">
+            <option>Hombre</option><option>Mujer</option><option>Indeterminado</option>
+          </select>
+        </div>
+        <div class="field col-3">
+          <label>59. ¿En gestación?</label>
+          <div class="inline-options">
+            <label><input type="radio" name="m[IDX][gestacion]" value="si"> SI</label>
+            <label><input type="radio" name="m[IDX][gestacion]" value="no"> NO</label>
+          </div>
+        </div>
+        <div class="field col-3">
+          <label>60. Rol en la familia</label>
+          <select name="m[IDX][rol]">
+            <option>Jefe(a) de familia</option><option>Cónyuge</option><option>Hijo(a)</option>
+            <option>Hermano(a)</option><option>Padre/Madre</option><option>Otro</option>
+          </select>
+        </div>
+        <div class="field col-3"><label>61. Ocupación</label><input type="text" name="m[IDX][ocupacion]"></div>
+        <div class="field col-3">
+          <label>62. Nivel educativo</label>
+          <select name="m[IDX][educacion]">
+            <option>Preescolar</option><option>Básica Primaria</option><option>Básica Secundaria</option>
+            <option>Media Académica o Clásica</option><option>Media Técnica (Bachillerato Técnico)</option>
+            <option>Normalista</option><option>Técnica Profesional</option><option>Tecnológica</option>
+            <option>Profesional</option><option>Especialización</option><option>Maestría</option><option>Doctorado</option>
+            <option>Ninguna</option>
+          </select>
+        </div>
+        <div class="field col-3">
+          <label>63. Régimen de afiliación</label>
+          <select name="m[IDX][regimen]">
+            <option>Subsidiado</option><option>Contributivo</option><option>Especial</option><option>Excepción</option><option>No afiliado</option>
+          </select>
+        </div>
+        <div class="field col-3"><label>64. EAPB</label><input type="text" name="m[IDX][eapb]"></div>
+        <div class="field col-3">
+          <label>65. Población de especial protección</label>
+          <div class="inline-options">
+            <label><input type="checkbox" name="m[IDX][esp_nna]"> NNA</label>
+            <label><input type="checkbox" name="m[IDX][esp_gest]"> Gestantes</label>
+            <label><input type="checkbox" name="m[IDX][esp_disc]"> Discapacidad</label>
+            <label><input type="checkbox" name="m[IDX][esp_mayor]"> Persona adulta mayor</label>
+            <label><input type="checkbox" name="m[IDX][esp_osd]"> Orientación sexual diversa</label>
+            <label><input type="checkbox" name="m[IDX][esp_victima]"> Víctimas de violencia</label>
+          </div>
+        </div>
+        <div class="field col-3">
+          <label>66. Pertenencia étnica</label>
+          <select name="m[IDX][etnica]">
+            <option>Indígena</option><option>ROM (Gitanos)</option><option>Raizal (San Andrés y Providencia)</option>
+            <option>Palenquero de San Basilio</option><option>Negro(a)</option><option>Afrocolombiano</option><option>Ninguna</option>
+          </select>
+        </div>
+        <div class="field col-3"><label>67. Comunidad o pueblo indígena</label><input type="text" name="m[IDX][pueblo_indigena]"></div>
+        <div class="field col-3">
+          <label>68. ¿Reconoce alguna discapacidad?</label>
+          <select name="m[IDX][discapacidad]">
+            <option>Sin discapacidad</option><option>Física</option><option>Auditiva</option><option>Visual</option>
+            <option>Sordoceguera</option><option>Intelectual</option><option>Psicosocial (mental)</option><option>Múltiple</option>
+          </select>
+        </div>
+        <div class="field col-3">
+          <label>69. ¿Condición de salud crónica?</label>
+          <div class="inline-options">
+            <label><input type="radio" name="m[IDX][salud_cronica]" value="si"> SI</label>
+            <label><input type="radio" name="m[IDX][salud_cronica]" value="no"> NO</label>
+          </div>
+        </div>
+
+        <!-- 70 - 83: Salud, atenciones y eventos -->
+        <div class="field col-3">
+          <label>70. ¿Cumple esquema de P y M según curso de vida/gestación?</label>
+          <div class="inline-options">
+            <label><input type="radio" name="m[IDX][cumple_pyms]" value="si"> SI</label>
+            <label><input type="radio" name="m[IDX][cumple_pyms]" value="no"> NO</label>
+          </div>
+        </div>
+
+        <div class="one-colum">
+          <label>71. Intervenciones pendientes (marque todas las que apliquen)</label>
+          <div class="inline-options">
+            <label><input type="checkbox" name="m[IDX][i_1]"> 1. Valoración Integral PYMS</label>
+            <label><input type="checkbox" name="m[IDX][i_2]"> 2. Odontología PYMS</label>
+            <label><input type="checkbox" name="m[IDX][i_3]"> 3. Promoción y apoyo LM</label>
+            <label><input type="checkbox" name="m[IDX][i_4]"> 4. Aplicación de flúor</label>
+            <label><input type="checkbox" name="m[IDX][i_5]"> 5. Profilaxis/remoción placa</label>
+            <label><input type="checkbox" name="m[IDX][i_6]"> 6. Vacunación según esquema</label>
+            <label><input type="checkbox" name="m[IDX][i_7]"> 7. Fortificación casera MNP</label>
+            <label><input type="checkbox" name="m[IDX][i_8]"> 8. Suplementación micronutrientes</label>
+            <label><input type="checkbox" name="m[IDX][i_9]"> 9. Desparasitación antihelmíntica</label>
+            <label><input type="checkbox" name="m[IDX][i_10]"> 10. Tamizaje anemia (Hb/Hto)</label>
+            <label><input type="checkbox" name="m[IDX][i_11]"> 11. Planificación familiar/anticoncepción</label>
+            <label><input type="checkbox" name="m[IDX][i_12]"> 12. Tamizaje riesgo cardiovascular</label>
+            <label><input type="checkbox" name="m[IDX][i_13]"> 13. Tamizaje ITS</label>
+            <label><input type="checkbox" name="m[IDX][i_14]"> 14. Tamizaje Ca cérvix</label>
+            <label><input type="checkbox" name="m[IDX][i_15]"> 15. Tamizaje Ca mama</label>
+            <label><input type="checkbox" name="m[IDX][i_16]"> 16. Tamizaje Ca próstata</label>
+            <label><input type="checkbox" name="m[IDX][i_19]"> 19. Controles prenatales</label>
+            <label><input type="checkbox" name="m[IDX][i_20]"> 20. Preparación mater/pater</label>
+            <label><input type="checkbox" name="m[IDX][i_21]"> 21. IVE</label>
+            <label><input type="checkbox" name="m[IDX][i_22]"> 22. Atención puerperio</label>
+            <label><input type="checkbox" name="m[IDX][i_23]"> 23. Seguimiento RN</label>
+            <label><input type="checkbox" name="m[IDX][i_24]"> 24. Educación para la salud</label>
+            <label><input type="checkbox" name="m[IDX][i_25]"> 25. Ninguno</label>
+          </div>
+        </div>
+
+        <div class="one-colum">
+          <label>72. Motivo por el cual no ha recibido atenciones de P y M</label>
+          <div class="inline-options">
+            <label><input type="checkbox" name="m[IDX][m_1]"> 1. Lugar lejano/cerrado/ausencia profesional</label>
+            <label><input type="checkbox" name="m[IDX][m_2]"> 2. Horarios restringidos</label>
+            <label><input type="checkbox" name="m[IDX][m_3]"> 3. Largos tiempos de espera</label>
+            <label><input type="checkbox" name="m[IDX][m_4]"> 4. No disponibilidad de tecnología</label>
+            <label><input type="checkbox" name="m[IDX][m_5]"> 5. Desconoce derecho DTPE</label>
+            <label><input type="checkbox" name="m[IDX][m_6]"> 6. Desconoce gratuidad</label>
+            <label><input type="checkbox" name="m[IDX][m_7]"> 7. Persona enferma</label>
+            <label><input type="checkbox" name="m[IDX][m_8]"> 8. Hospitalización</label>
+            <label><input type="checkbox" name="m[IDX][m_9]"> 9. Orden médica por enfermedad</label>
+            <label><input type="checkbox" name="m[IDX][m_10]"> 10. Falta de tiempo del cuidador</label>
+            <label><input type="checkbox" name="m[IDX][m_11]"> 11. Rechazo por tradición/cultura</label>
+            <label><input type="checkbox" name="m[IDX][m_12]"> 12. No afiliado</label>
+          </div>
+        </div>
+
+        <div class="field col-3">
+          <label>73. ¿Realiza deporte o ejercicio?</label>
+          <div class="inline-options">
+            <label><input type="radio" name="m[IDX][ejercicio]" value="si"> SI</label>
+            <label><input type="radio" name="m[IDX][ejercicio]" value="no"> NO</label>
+          </div>
+        </div>
+        <div class="field col-3">
+          <label>74. &lt;6 meses: ¿LM exclusiva?</label>
+          <div class="inline-options">
+            <label><input type="radio" name="m[IDX][lm_exclusiva]" value="si"> SI</label>
+            <label><input type="radio" name="m[IDX][lm_exclusiva]" value="no"> NO</label>
+          </div>
+        </div>
+        <div class="field col-3">
+          <label>75. &lt;2 años: ¿Hasta cuándo recibió LM? (meses)</label>
+          <input type="number" name="m[IDX][lm_meses]" min="0">
+        </div>
+
+        <div class="field col-3"><label>76.1 Peso (kg)</label><input type="number" step="0.01" name="m[IDX][peso]"></div>
+        <div class="field col-3"><label>76.2 Talla (cm)</label><input type="number" step="0.1" name="m[IDX][talla]"></div>
+        <div class="field col-3">
+          <label>77. Diagnóstico nutricional (peso/talla)</label>
+          <select name="m[IDX][dx_nutricional]">
+            <option>Obesidad</option><option>Sobrepeso</option><option>Riesgo de Sobrepeso</option>
+            <option>Peso Adecuado para la Talla</option><option>Riesgo de Desnutrición Aguda</option>
+            <option>Desnutrición Aguda Moderada</option><option>Desnutrición Aguda Severa</option>
+          </select>
+        </div>
+        <div class="field col-3"><label>78. Perímetro braquial (MUAC)</label><input type="text" name="m[IDX][muac]"></div>
+
+        <div class="field col-12">
+          <label>79. Signos físicos de desnutrición aguda (marque)</label>
+          <div class="inline-options">
+            <label><input type="checkbox" name="m[IDX][s_cabeza]"> Cabeza</label>
+            <label><input type="checkbox" name="m[IDX][s_cara]"> Cara</label>
+            <label><input type="checkbox" name="m[IDX][s_piel]"> Piel</label>
+            <label><input type="checkbox" name="m[IDX][s_torax]"> Tórax y abdomen</label>
+            <label><input type="checkbox" name="m[IDX][s_extrem]"> Extremidades</label>
+            <label><input type="checkbox" name="m[IDX][s_comport]"> Comportamiento</label>
+          </div>
+        </div>
+
+        <div class="field col-12">
+          <label>80. Enfermedad actual/último mes (marque y describa)</label>
+          <div class="inline-options">
+            <label><input type="radio" name="m[IDX][enf_mes]" value="si"> SI</label>
+            <label><input type="radio" name="m[IDX][enf_mes]" value="no"> NO</label>
+          </div>
+          <textarea name="m[IDX][enf_cuales]" placeholder="Diarrea, tos/gripa/bronquitis, piel/alergias, accidente, otra…"></textarea>
+        </div>
+
+        <div class="field col-12">
+          <label>81. ¿Recibe atención/tratamiento para la enfermedad actual?</label>
+          <div class="inline-options">
+            <label><input type="radio" name="m[IDX][atencion_actual]" value="si"> SI</label>
+            <label><input type="radio" name="m[IDX][atencion_actual]" value="no"> NO</label>
+          </div>
+        </div>
+
+        <div class="field col-12">
+          <label>82. Si NO recibe atención, motivo</label>
+          <div class="inline-options">
+            <label><input type="checkbox" name="m[IDX][n_1]"> 1. Lugar lejano/cerrado/ausencia profesional</label>
+            <label><input type="checkbox" name="m[IDX][n_2]"> 2. Horarios restringidos</label>
+            <label><input type="checkbox" name="m[IDX][n_3]"> 3. Largos tiempos de espera</label>
+            <label><input type="checkbox" name="m[IDX][n_4]"> 4. No disponibilidad de tecnología</label>
+            <label><input type="checkbox" name="m[IDX][n_5]"> 5. Falta de tiempo del cuidador</label>
+            <label><input type="checkbox" name="m[IDX][n_6]"> 6. Tratamiento con remedios caseros</label>
+            <label><input type="checkbox" name="m[IDX][n_7]"> 7. Rechazo por tradición/cultura</label>
+            <label><input type="checkbox" name="m[IDX][n_8]"> 8. No afiliado</label>
+          </div>
+        </div>
+
+        <div class="field col-12">
+          <label>83. Si pertenece a población étnica: ¿Acompañamiento por medicina tradicional?</label>
+          <div class="inline-options">
+            <label><input type="checkbox" name="m[IDX][med_trad_medico]"> Médico tradicional</label>
+            <label><input type="checkbox" name="m[IDX][med_trad_partera]"> Partera</label>
+            <label><input type="checkbox" name="m[IDX][med_trad_sabedor]"> Sabedor de la salud propia</label>
+            <label><input type="checkbox" name="m[IDX][med_trad_noaplica]"> No aplica</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button type="button" class="btn danger" onclick="this.closest('details').remove()">Eliminar integrante</button>
+      </div>
+    </details>
+  </template>
+
+  <script>
+    let idx = 0;
+    function agregarMiembro(){
+      const tpl = document.getElementById('tpl-miembro').content.cloneNode(true);
+      tpl.querySelectorAll('[name]').forEach(el=>{
+        el.name = el.name.replace('IDX', idx.toString());
+      });
+      document.getElementById('miembros').appendChild(tpl);
+      idx++;
+    }
+    function colapsarMiembros(){
+      document.querySelectorAll('#miembros details').forEach(d=> d.open = !d.open);
+    }
+    // 1er integrante de base
+    window.addEventListener('DOMContentLoaded', agregarMiembro);
+  </script>
+</body>
+</html>
